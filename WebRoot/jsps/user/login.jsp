@@ -1,53 +1,82 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-  <head>
-    
-    <title>登录</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<meta http-equiv="content-type" content="text/html;charset=utf-8">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>登录</title>
+
+<link rel="stylesheet"
+	href='<c:url value="/bootstrap-3.3.7-dist/css/bootstrap.min.css"/>'>
+<script
+	src='<c:url value="/bootstrap-3.3.7-dist/js/jquery-3.2.1.min.js"/>'></script>
+<script src='<c:url value="/bootstrap-3.3.7-dist/js/bootstrap.min.js"/>'></script>
+</head>
+
+<body>
+	<h1 style="text-align: center">登录</h1>
+	<br>
+	<br>
+	<br>
+	<p style="color: red; font-weight: 900; text-align: center">${msg }</p>
+	<form class="form-horizontal" role="form" action="<c:url value='/UserServlet'/>" method="post" target="_top">
+		<input type="hidden" name="method" value="login"/>
+		<div class="form-group">
+			<label for="firstname" class="col-sm-4 control-label">用户名</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="username" name="username"
+					placeholder="请输入名字">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lastname" class="col-sm-4 control-label">密&nbsp;&nbsp;&nbsp;&nbsp;码</label>
+			<div class="col-sm-3">
+				<input type="password" class="form-control" id="password" name="password"
+					placeholder="请输入密码">
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="lastname" class="col-sm-4 control-label">验证码</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" id="verifyCode"
+					name="verifyCode" placeholder="请输入验证码"> <br> <img
+					id="vCode" src="<c:url value='/VerifyCodeServlet'/>" border="2" />
+				<button type="button" class="btn btn-link" id=verifyCodeChange>看不清？换一张</button>
+			</div>
+		</div>
+
+		<br> <br>
+		<div class="form-group">
+			<div class="col-sm-offset-4 col-sm-10">
+				<button type="button" class="btn btn-default" id="returnHome">返回主页</button>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<button type="submit" class="btn btn-primary">登录</button>
+				
+			</div>
+		</div>
+
+
+	</form>
+	<br>
+
+
 <script type="text/javascript">
-	/*
-	如果一个表单项的name和<img>的id相同，那么可能会出问题！一般只有IE出问题！
-	*/
-	function _change() {
-		/*
-		1. 获取<img>元素
-		*/
+	$("#verifyCodeChange").click(function(){
 		var ele = document.getElementById("vCode");
 		ele.src = "<c:url value='/VerifyCodeServlet'/>?xxx=" + new Date().getTime();
-		
-	}
+	});
+
+	$("#returnHome").click(function(){
+		window.location.href="<c:url value='/jsps/main.jsp'/>";
+	});
+
+
 </script>
-  </head>
-  
-  <body>
-  <h1>登录</h1>
-<%--
-1. 显示错误信息
-2. 回显
- --%>
-<p style="color: red; font-weight: 900">${msg }</p>
-<form action="<c:url value='/UserServlet'/>" method="post" target="_top">
-	<input type="hidden" name="method" value="login"/>
-	用户名：<input type="text" name="username" value="${form.username }"/><br/>
-	密　码：<input type="password" name="password" value="${form.password }"/><br/>
-	<input type="submit" value="登录"/>
-	验证码：<input type="text" name="verifyCode" size="3"/>
-        <img id="vCode" src="<c:url value='/VerifyCodeServlet'/>" border="2"/>
-        <a href="javascript:_change()">换一张</a>${errors.verifyCode }<br/>
-</form>
-<a href="<c:url value='/jsps/main.jsp'/>">返回主页</a>
-  </body>
+
+</body>
 </html>

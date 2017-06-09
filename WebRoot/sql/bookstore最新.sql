@@ -63,7 +63,7 @@ SELECT * FROM orders;
 /*订单项表*/
 CREATE TABLE orderitem (
   iid CHAR(32) PRIMARY KEY,/*主键*/
-  `count` INT,/*数量*/orderitem
+  `count` INT,/*数量*/
   subtotal DECIMAL(10,0),/*小计*/
   oid CHAR(32),/*所属订单*/
   bid CHAR(32),/*订单项所指的商品*/

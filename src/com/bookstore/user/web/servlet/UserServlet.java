@@ -58,6 +58,7 @@ public class UserServlet extends BaseServlet {
 			request.setAttribute("msg", e.getMessage());
 			request.setAttribute("form", form);
 			return "f:/jsps/user/login.jsp";
+
 		}
 	}
 	

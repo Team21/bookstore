@@ -31,7 +31,7 @@
 		    border-collapse: collapse;/*单线的列表边框*/
 		}
 		.table td{
-			border:1px solid gray;/*固定边框,1像素*/
+			border:0px solid gray;/*固定边框,1像素*/
 		}
 		iframe {
 			width: 100%;
@@ -42,7 +42,7 @@
   
   <body>
 <table class="table" align="center">
-	<tr style="background: #4682B4; height: 120px; ">
+	<tr style="background: #51acf9; height: 120px; ">
 		<td colspan="2" align="center">
 			<iframe frameborder="0" src="<c:url value='/jsps/top.jsp'/>" name="top"></iframe>
 		</td>
